@@ -1,0 +1,41 @@
+{
+    "name": "dafiti/datajet",
+    "description": "Dafiti Datajet Integration",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "dafiti",
+        "datajet",
+        "search",
+        "recommendation"
+    ],
+    "authors": [
+        {
+            "name": "Fabio da Silva Ribeiro",
+            "email": "fabio.ribeiro@dafiti.com.br"
+        }
+    ],
+    "support": {
+        "issue": "https://github.com/dafiti/datajet/issues"
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "guzzlehttp/guzzle": "^6.1.0",
+        "php": ">=5.5.0",
+        "respect/validation": "^1.0.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "@stable",
+        "fabpot/php-cs-fixer": "@stable"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dafiti\\Datajet\\": "src/Datajet/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Dafiti\\Datajet\\": "tests/Datajet/"
+        }
+    }
+}
