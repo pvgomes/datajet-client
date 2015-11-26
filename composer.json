@@ -1,13 +1,13 @@
 {
-    "name": "dafiti/datajet",
-    "description": "Dafiti Datajet Integration",
+    "name": "dafiti/datajet-client",
+    "description": "Dafiti Datajet Client for PHP",
     "type": "library",
     "license": "MIT",
     "keywords": [
         "dafiti",
         "datajet",
-        "search",
-        "recommendation"
+        "client",
+        "search"
     ],
     "authors": [
         {
@@ -16,7 +16,7 @@
         }
     ],
     "support": {
-        "issue": "https://github.com/dafiti/datajet/issues"
+        "issue": "https://github.com/dafiti/datajet-client/issues"
     },
     "minimum-stability": "dev",
     "require": {
