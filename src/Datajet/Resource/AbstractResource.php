@@ -17,7 +17,7 @@ abstract class AbstractResource
     protected $config = [];
 
     /**
-     * Construct with Guzzle Http Client
+     * Construct with Guzzle Http Client.
      *
      * @param \GuzzleHttp\Client $httpClient Guzzle Http Client
      */

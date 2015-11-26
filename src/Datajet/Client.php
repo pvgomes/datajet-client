@@ -6,7 +6,7 @@ use Dafiti\Datajet\Exception\ResourceNotFound;
 use GuzzleHttp\Client as HttpClient;
 
 /**
- * Http client thats provide a simple way to use Datajet service in PHP
+ * Http client thats provide a simple way to use Datajet service in PHP.
  */
 class Client
 {
@@ -35,11 +35,11 @@ class Client
     public function __construct(HttpClient $httpClient, array $config = [])
     {
         $this->httpClient = $httpClient;
-        $this->config     = $config;
+        $this->config = $config;
     }
 
     /**
-     * Get return instance
+     * Get return instance.
      *
      * @param string $resource Resource name
      *
@@ -53,7 +53,7 @@ class Client
             return $this->resources[$resource];
         }
 
-        $class = '\\Dafiti\\Datajet\\Resource\\' . ucfirst($resource);
+        $class = '\\Dafiti\\Datajet\\Resource\\'.ucfirst($resource);
 
         if (!class_exists($class)) {
             throw new ResourceNotFound($resource);
@@ -65,7 +65,7 @@ class Client
     }
 
     /**
-     * Create a instance of Client with defined config
+     * Create a instance of Client with defined config.
      *
      * @param array $config Datajet request config
      *
@@ -77,9 +77,9 @@ class Client
             'base_uri' => self::API_URL,
             'defaults' => [
                 'headers' => [
-                    'Content-Type' => 'application/json'
-                ]
-            ]
+                    'Content-Type' => 'application/json',
+                ],
+            ],
         ];
 
         $httpClient = new HttpClient($httpConfig);
