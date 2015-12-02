@@ -34,7 +34,7 @@ $config = [
 
 $client = \Dafiti\Datajet\Client::create($config);
 ```
-All returned data is a \stdClass object.
+All returned data is an array.
 
 #### Import products
 ```php

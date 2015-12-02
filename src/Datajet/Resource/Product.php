@@ -86,7 +86,7 @@ class Product extends AbstractResource
             ],
         ]);
 
-        $response = json_decode($response->getBody());
+        $response = json_decode($response->getBody(), true);
 
         return $response;
     }

@@ -268,7 +268,7 @@ class ProductTest extends \PHPUnit_Framework_TestCase
         $resource = new Product($client, $this->config);
         $result   = $resource->search($data);
 
-        $this->assertFalse(isset($result->items));
+        $this->assertFalse(isset($result['items']));
     }
 
     /**
@@ -298,6 +298,6 @@ class ProductTest extends \PHPUnit_Framework_TestCase
         $resource = new Product($client, $this->config);
         $result   = $resource->search($data);
 
-        $this->assertCount(2, $result->items);
+        $this->assertCount(2, $result['items']);
     }
 }
