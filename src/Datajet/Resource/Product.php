@@ -90,4 +90,32 @@ class Product extends AbstractResource
 
         return $response;
     }
+
+    /**
+     * Product Delete.
+     *
+     * @param int $id
+     *
+     * @return bool
+     */
+    public function delete($id)
+    {
+        if (!is_numeric($id)) {
+            throw new \InvalidArgumentException('ID Product must be numeric');
+        }
+
+        $response = $this->client->delete('product/{$id}', [
+            'query' => [
+                'key' => $this->config['hawk']['import_key'],
+            ],
+        ]);
+
+        $response = json_decode($response->getBody(), true);
+
+        if (isset($response['affected']) && $response['affected'] > 0) {
+            return true;
+        }
+
+        return false;
+    }
 }
