@@ -82,6 +82,14 @@ $search = [
 
 $client->product->search($search);
 ```
+
+Please see Datajet.IO docs: [https://github.com/datajet-io/docs/wiki](https://github.com/datajet-io/docs/wiki)
+
+#### Delete products
+```php
+$client->product->delete($id);
+```
+
 Please see Datajet.IO docs: [https://github.com/datajet-io/docs/wiki](https://github.com/datajet-io/docs/wiki)
 
 ## License
