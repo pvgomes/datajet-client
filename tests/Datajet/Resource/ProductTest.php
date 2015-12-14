@@ -343,9 +343,8 @@ class ProductTest extends \PHPUnit_Framework_TestCase
      */
     public function testDeleteWhenNotExistProduct()
     {
-
         $mock = new MockHandler([
-            new Response(200, $this->headers, json_encode(['affected' => 0]))
+            new Response(404, $this->headers, json_encode(['affected' => 0]))
         ]);
 
         $handler = HandlerStack::create($mock);
