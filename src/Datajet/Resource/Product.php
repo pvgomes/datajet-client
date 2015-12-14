@@ -3,6 +3,7 @@
 namespace Dafiti\Datajet\Resource;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use Respect\Validation\Validator as v;
 
 class Product extends AbstractResource
@@ -104,11 +105,15 @@ class Product extends AbstractResource
             throw new \InvalidArgumentException('ID Product must be numeric');
         }
 
-        $response = $this->client->delete('product/{$id}', [
-            'query' => [
-                'key' => $this->config['hawk']['import_key'],
-            ],
-        ]);
+        try {
+            $response = $this->client->delete("product/{$id}", [
+                'query' => [
+                    'key' => $this->config['hawk']['import_key'],
+                ],
+            ]);
+        } catch (ClientException $e) {
+            return false;
+        }
 
         $response = json_decode($response->getBody(), true);
 
