@@ -106,7 +106,7 @@ class Product extends AbstractResource
         }
 
         try {
-            $response = $this->client->delete('product/{$id}', [
+            $response = $this->client->delete("product/{$id}", [
                 'query' => [
                     'key' => $this->config['hawk']['import_key'],
                 ],
