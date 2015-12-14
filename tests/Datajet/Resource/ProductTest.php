@@ -353,4 +353,21 @@ class ProductTest extends \PHPUnit_Framework_TestCase
         $resource = new Product($client, $this->config);
         $this->assertFalse($resource->delete(1));
     }
+
+    /**
+     * @covers \Dafiti\Datajet\Resource\Product::delete
+     */
+    public function testDeleteWhenNothinghigIsAffected()
+    {
+
+        $mock = new MockHandler([
+            new Response(200, $this->headers, json_encode(['affected' => 0]))
+        ]);
+
+        $handler = HandlerStack::create($mock);
+        $client  = new Client(['handler' => $handler]);
+
+        $resource = new Product($client, $this->config);
+        $this->assertFalse($resource->delete(1));
+    }
 }
