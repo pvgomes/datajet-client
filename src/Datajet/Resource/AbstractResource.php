@@ -17,6 +17,11 @@ abstract class AbstractResource
     protected $config = [];
 
     /**
+     * @var string
+     */
+    protected $uri;
+
+    /**
      * Construct with Guzzle Http Client.
      *
      * @param \GuzzleHttp\Client $httpClient Guzzle Http Client

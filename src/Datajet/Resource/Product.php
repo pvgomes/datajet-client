@@ -13,6 +13,8 @@ class Product extends AbstractResource
         $this->validateConfig($config);
 
         parent::__construct($client, $config);
+
+        $this->uri = "{$this->config['hawk']['uri']}/1.1/";
     }
 
     private function validateConfig(array $config)
@@ -25,6 +27,10 @@ class Product extends AbstractResource
             ->key(
                 'hawk',
                 v::arrayVal()->notEmpty()
+                    ->key(
+                        'uri',
+                        v::url()->notEmpty()
+                    )
                     ->key(
                         'search_key',
                         v::alnum()->notEmpty()
@@ -49,7 +55,7 @@ class Product extends AbstractResource
      */
     public function import(array $data)
     {
-        $response = $this->client->post('product/', [
+        $response = $this->client->post("{$this->uri}product/", [
             'json' => $data,
             'query' => [
                 'key' => $this->config['hawk']['import_key'],
@@ -80,7 +86,7 @@ class Product extends AbstractResource
             $data['size'] = 10;
         }
 
-        $response = $this->client->post('search/', [
+        $response = $this->client->post("{$this->uri}search/", [
             'json' => $data,
             'query' => [
                 'key' => $this->config['hawk']['search_key'],
@@ -106,7 +112,7 @@ class Product extends AbstractResource
         }
 
         try {
-            $response = $this->client->delete("product/{$id}", [
+            $response = $this->client->delete("{$this->uri}product/{$id}", [
                 'query' => [
                     'key' => $this->config['hawk']['import_key'],
                 ],

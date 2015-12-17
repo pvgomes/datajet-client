@@ -45,7 +45,14 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $client = new Client($httpClient, ['hawk' => ['search_key' => 'a', 'import_key' => 'a']]);
+        $client = new Client($httpClient, [
+            'hawk' => [
+                'uri'        => 'http://hawk.local',
+                'search_key' => 'a',
+                'import_key' => 'a'
+            ]
+        ]);
+
         $result = $client->product;
 
         $this->assertInstanceOf('Dafiti\Datajet\Resource\AbstractResource', $result);
@@ -61,7 +68,13 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $client = new Client($httpClient, ['hawk' => ['search_key' => 'a', 'import_key' => 'a']]);
+        $client = new Client($httpClient, [
+            'hawk' => [
+                'uri'        => 'http://hawk.local',
+                'search_key' => 'a',
+                'import_key' => 'a'
+            ]
+        ]);
 
         $client->product;
 

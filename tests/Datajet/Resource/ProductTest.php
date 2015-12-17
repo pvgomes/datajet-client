@@ -26,6 +26,7 @@ class ProductTest extends \PHPUnit_Framework_TestCase
     {
         $this->config = [
             'hawk' => [
+                'uri'        => 'http://hawk.local',
                 'import_key' => 'a',
                 'search_key' => 'b'
             ]
