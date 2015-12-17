@@ -27,6 +27,7 @@ Autoloading is [PSR-4](https://github.com/php-fig/fig-standards/blob/master/acce
 
 $config = [
     'hawk' => [
+        'uri'        => '<hawk-uri>', // eg.: http://hawk.euw.datajet.io
         'import_key' => '<your-key>',
         'search_key' => '<your-key>'
     ]

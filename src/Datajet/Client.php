@@ -10,8 +10,6 @@ use GuzzleHttp\Client as HttpClient;
  */
 class Client
 {
-    const API_URL = 'http://hawk.euw.datajet.io/1.1/';
-
     /**
      * @var array
      */
@@ -74,7 +72,6 @@ class Client
     public static function create(array $config = [])
     {
         $httpConfig = [
-            'base_uri' => self::API_URL,
             'defaults' => [
                 'headers' => [
                     'Content-Type' => 'application/json',
