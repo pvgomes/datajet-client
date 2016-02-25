@@ -14,7 +14,8 @@ class Product extends AbstractResource
 
         parent::__construct($client, $config);
 
-        $this->uri = "{$this->config['hawk']['uri']}/1.1/";
+        $this->uriSearch = "{$this->config['search']['uri']}/2.0/";
+        $this->uriImport = "{$this->config['data']['uri']}/2.0/";
     }
 
     private function validateConfig(array $config)
@@ -25,18 +26,26 @@ class Product extends AbstractResource
 
         $validator = v::arrayVal()->notEmpty()
             ->key(
-                'hawk',
+                'search',
                 v::arrayVal()->notEmpty()
                     ->key(
                         'uri',
                         v::url()->notEmpty()
                     )
                     ->key(
-                        'search_key',
+                        'key',
                         v::alnum()->notEmpty()
                     )
+            )
+            ->key(
+                'data',
+                v::arrayVal()->notEmpty()
                     ->key(
-                        'import_key',
+                        'uri',
+                        v::url()->notEmpty()
+                    )
+                    ->key(
+                        'key',
                         v::alnum()->notEmpty()
                     )
             );
@@ -55,10 +64,10 @@ class Product extends AbstractResource
      */
     public function import(array $data)
     {
-        $response = $this->client->post("{$this->uri}product/", [
+        $response = $this->client->post("{$this->uriImport}product/", [
             'json' => $data,
             'query' => [
-                'key' => $this->config['hawk']['import_key'],
+                'key' => $this->config['data']['key'],
             ],
         ]);
 
@@ -86,10 +95,10 @@ class Product extends AbstractResource
             $data['size'] = 10;
         }
 
-        $response = $this->client->post("{$this->uri}search/", [
+        $response = $this->client->post("{$this->uriSearch}search/", [
             'json' => $data,
             'query' => [
-                'key' => $this->config['hawk']['search_key'],
+                'key' => $this->config['search']['key'],
             ],
         ]);
 
@@ -112,9 +121,9 @@ class Product extends AbstractResource
         }
 
         try {
-            $response = $this->client->delete("{$this->uri}product/{$id}", [
+            $response = $this->client->delete("{$this->uriImport}product/{$id}", [
                 'query' => [
-                    'key' => $this->config['hawk']['import_key'],
+                    'key' => $this->config['data']['key'],
                 ],
             ]);
         } catch (ClientException $e) {

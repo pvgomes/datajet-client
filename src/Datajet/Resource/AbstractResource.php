@@ -19,7 +19,12 @@ abstract class AbstractResource
     /**
      * @var string
      */
-    protected $uri;
+    protected $uriImport;
+
+    /**
+     * @var string
+     */
+    protected $uriSearch;
 
     /**
      * Construct with Guzzle Http Client.
