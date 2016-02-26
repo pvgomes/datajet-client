@@ -26,10 +26,13 @@ Autoloading is [PSR-4](https://github.com/php-fig/fig-standards/blob/master/acce
 ```php
 
 $config = [
-    'hawk' => [
-        'uri'        => '<hawk-uri>', // eg.: http://hawk.euw.datajet.io
-        'import_key' => '<your-key>',
-        'search_key' => '<your-key>'
+    'data' => [
+        'uri' => '<import-uri>', // eg.: http://fisherman.sae.datajet.io
+        'key' => '<your-import-key>'
+    ],
+    'search' => [
+        'uri' => '<search-uri>', // eg.: http://hawk.sae.datajet.io
+        'key' => '<your-search-key>'
     ]
 ];
 

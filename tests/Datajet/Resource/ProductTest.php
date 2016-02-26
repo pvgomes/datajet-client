@@ -25,10 +25,13 @@ class ProductTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->config = [
-            'hawk' => [
+            'data' => [
+                'uri'        => 'http://fisherman.local',
+                'key' => 'b'
+            ],
+            'search' => [
                 'uri'        => 'http://hawk.local',
-                'import_key' => 'a',
-                'search_key' => 'b'
+                'key' => 'b'
             ]
         ];
 

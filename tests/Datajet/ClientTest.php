@@ -46,10 +46,13 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $client = new Client($httpClient, [
-            'hawk' => [
+            'data' => [
+                'uri'        => 'http://fisherman.local',
+                'key' => 'b'
+            ],
+            'search' => [
                 'uri'        => 'http://hawk.local',
-                'search_key' => 'a',
-                'import_key' => 'a'
+                'key' => 'b'
             ]
         ]);
 
@@ -69,10 +72,13 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $client = new Client($httpClient, [
-            'hawk' => [
+            'data' => [
+                'uri'        => 'http://fisherman.local',
+                'key' => 'b'
+            ],
+            'search' => [
                 'uri'        => 'http://hawk.local',
-                'search_key' => 'a',
-                'import_key' => 'a'
+                'key' => 'b'
             ]
         ]);
 
