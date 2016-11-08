@@ -52,7 +52,7 @@ class ProductTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldThrowExceptionWhenSetEmptyConfigIntoConstructor()
     {
-        $client = $this->getMock('\GuzzleHttp\Client');
+        $client = $this->createMock('\GuzzleHttp\Client');
 
         new Product($client);
     }
@@ -65,7 +65,7 @@ class ProductTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldThrowExceptionWhenConfigKeysIsNotDefined()
     {
-        $client = $this->getMock('\GuzzleHttp\Client');
+        $client = $this->createMock('\GuzzleHttp\Client');
 
         new Product($client, ['some' => 'thing']);
     }
@@ -76,7 +76,7 @@ class ProductTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldInstanceOfAbstractResource()
     {
-        $httpClient = $this->getMock('\GuzzleHttp\Client');
+        $httpClient = $this->createMock('\GuzzleHttp\Client');
         $resource   = new Product($httpClient, $this->config);
 
         $this->assertInstanceOf('\Dafiti\Datajet\Resource\AbstractResource', $resource);
@@ -106,6 +106,7 @@ class ProductTest extends \PHPUnit_Framework_TestCase
             ['sku' => 'AAA']
         ];
 
+        $resource = new Product($client, $this->config);
         $resource = new Product($client, $this->config);
 
         $resource->import($data);
@@ -305,25 +306,26 @@ class ProductTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(2, $result['items']);
     }
 
-    /**
-     * @covers \Dafiti\Datajet\Resource\Product::delete
-     *
-     * @expectedException        InvalidArgumentException
-     * @expectedExceptionMessage ID Product must be numeric
-     */
-    public function testDeleteWhenIdIsntNumeric()
-    {
-
-        $mock = new MockHandler([
-            new Response(200, $this->headers, json_encode([]))
-        ]);
-
-        $handler = HandlerStack::create($mock);
-        $client  = new Client(['handler' => $handler]);
-
-        $resource = new Product($client, $this->config);
-        $resource->delete('DAFITI');
-    }
+     /**		
+      * @covers \Dafiti\Datajet\Resource\Product::delete		
+      *		
+      * @expectedException        InvalidArgumentException		
+      * @expectedExceptionMessage ID Product cannot be empty
+      */		
+     public function testDeleteWhenIdIsEmpty()		
+     {		
+ 		
+         $mock = new MockHandler([		
+             new Response(200, $this->headers, json_encode([]))
+         ]);		
+ 		
+         $handler = HandlerStack::create($mock);		
+         $client  = new Client(['handler' => $handler]);		
+ 		
+         $resource = new Product($client, $this->config);
+         $resource->delete('');
+     }	
+	
 
     /**
      * @covers \Dafiti\Datajet\Resource\Product::delete

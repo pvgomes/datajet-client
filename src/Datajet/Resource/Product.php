@@ -110,16 +110,16 @@ class Product extends AbstractResource
     /**
      * Product Delete.
      *
-     * @param int $id
+     * @param string $id
      *
      * @return bool
      */
     public function delete($id)
     {
-        if (!is_numeric($id)) {
-            throw new \InvalidArgumentException('ID Product must be numeric');
+        if (empty($id)) {
+           throw new \InvalidArgumentException('ID Product cannot be empty');
         }
-
+	
         try {
             $response = $this->client->delete("{$this->uriImport}product/{$id}", [
                 'query' => [
