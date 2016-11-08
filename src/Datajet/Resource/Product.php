@@ -110,32 +110,33 @@ class Product extends AbstractResource
     /**
      * Product Delete.
      *
-     * @param int $id
+     * @param string $id
      *
      * @return bool
      */
     public function delete($id)
     {
-        if (!is_numeric($id)) {
-            throw new \InvalidArgumentException('ID Product must be numeric');
+        $response = false;
+        if (empty($id)) {
+            throw new \InvalidArgumentException('ID Product cannot be empty');
         }
 
         try {
-            $response = $this->client->delete("{$this->uriImport}product/{$id}", [
+            $apiResponse = $this->client->delete("{$this->uriImport}product/{$id}", [
                 'query' => [
                     'key' => $this->config['data']['key'],
                 ],
             ]);
+
+            $apiResponse = json_decode($apiResponse->getBody(), true);
+
+            if (isset($apiResponse['affected']) && $apiResponse['affected'] > 0) {
+                $response = true;
+            }
         } catch (ClientException $e) {
-            return false;
+            $response = false;
         }
 
-        $response = json_decode($response->getBody(), true);
-
-        if (isset($response['affected']) && $response['affected'] > 0) {
-            return true;
-        }
-
-        return false;
+        return $response;
     }
 }

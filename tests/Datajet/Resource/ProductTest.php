@@ -107,7 +107,6 @@ class ProductTest extends \PHPUnit_Framework_TestCase
         ];
 
         $resource = new Product($client, $this->config);
-
         $resource->import($data);
     }
 
@@ -305,25 +304,26 @@ class ProductTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(2, $result['items']);
     }
 
-    /**
-     * @covers \Dafiti\Datajet\Resource\Product::delete
-     *
-     * @expectedException        InvalidArgumentException
-     * @expectedExceptionMessage ID Product must be numeric
-     */
-    public function testDeleteWhenIdIsntNumeric()
-    {
-
-        $mock = new MockHandler([
-            new Response(200, $this->headers, json_encode([]))
-        ]);
-
-        $handler = HandlerStack::create($mock);
-        $client  = new Client(['handler' => $handler]);
-
-        $resource = new Product($client, $this->config);
-        $resource->delete('DAFITI');
-    }
+     /**		
+      * @covers \Dafiti\Datajet\Resource\Product::delete		
+      *		
+      * @expectedException        InvalidArgumentException		
+      * @expectedExceptionMessage ID Product cannot be empty
+      */		
+     public function testDeleteWhenIdIsEmpty()		
+     {		
+ 		
+         $mock = new MockHandler([		
+             new Response(200, $this->headers, json_encode([]))
+         ]);		
+ 		
+         $handler = HandlerStack::create($mock);		
+         $client  = new Client(['handler' => $handler]);		
+ 		
+         $resource = new Product($client, $this->config);
+         $resource->delete('');
+     }	
+	
 
     /**
      * @covers \Dafiti\Datajet\Resource\Product::delete
